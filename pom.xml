@@ -6,7 +6,7 @@
    <modelVersion>4.0.0</modelVersion>
    <groupId>com.github.locnavi</groupId>
    <artifactId>IndoorNavigationAndroidWebSDK</artifactId>
-   <version>0.0.5</version>
+   <version>0.0.6</version>
   <dependencies>
     <dependency>
       <groupId>org.altbeacon</groupId>

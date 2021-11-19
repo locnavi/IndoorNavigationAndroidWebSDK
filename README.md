@@ -16,7 +16,7 @@
 在app的build.gradle中添加
 ```bash
     // use jitpack from github
-    implementation 'com.github.locnavi:3d-navigation-android-sdk:0.0.5'
+    implementation 'com.github.locnavi:3d-navigation-android-sdk:0.0.6'
     implementation 'com.orhanobut:logger:2.2.0'
     implementation 'org.altbeacon:android-beacon-library:2+'
 ```
@@ -53,7 +53,7 @@
 
 ### 显示地图列表
 ```js
-    LocNaviWebSDK.openMap(this);
+    LocNaviWebSDK.openMapList(this);
 ```
 
 ### 显示室内地图
