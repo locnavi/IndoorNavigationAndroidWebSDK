@@ -4,9 +4,9 @@
    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
              http://maven.apache.org/maven-v4_0_0.xsd">
    <modelVersion>4.0.0</modelVersion>
-   <groupId>com.locnavi.websdk</groupId>
-   <artifactId>locnavi</artifactId>
-   <version>0.0.3</version>
+   <groupId>com.github.locnavi</groupId>
+   <artifactId>IndoorNavigationAndroidWebSDK</artifactId>
+   <version>0.0.4</version>
   <dependencies>
     <dependency>
       <groupId>org.altbeacon</groupId>
@@ -14,11 +14,11 @@
       <version>2+</version>
       <scope>compile</scope>
     </dependency>
-  </dependencies>
     <dependency>
       <groupId>com.orhanobut</groupId>
       <artifactId>logger</artifactId>
       <version>2.2.0</version>
       <scope>compile</scope>
     </dependency>
+  </dependencies>
 </project>
