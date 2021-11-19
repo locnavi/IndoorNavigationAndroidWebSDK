@@ -1,4 +1,4 @@
-# 3d-navigation-android-sdk
+# IndoorNavigationAndroidWebSDK
 
 3d-navigation-android-sdk 是一个室内导航SDK，支持院内3D地图展示、导航等功能。
 
