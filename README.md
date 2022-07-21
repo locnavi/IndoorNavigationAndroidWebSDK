@@ -18,7 +18,7 @@
     // use jitpack from github
     implementation 'com.github.locnavi:3d-navigation-android-sdk:0.0.8'
     implementation 'com.orhanobut:logger:2.2.0'
-    implementation 'org.altbeacon:android-beacon-library:2+'
+    implementation 'org.altbeacon:android-beacon-library:2.19.4'
 ```
 
 
@@ -50,6 +50,8 @@
         LocNaviWebSDK.init(new LocNaviWebSDK.Configuration
                 .Builder(this)
                 .appKey(Constants.appKey)   //传入申请到的appKey
+                .uploadApi("https://xxxx/putInfo")     //定时上传定位的api地址
+                .uploadInterval(5000)   //定时上传时间间隔
                 .debug(true)    //控制是否使用测试地图
                 .build());
 ```
@@ -68,4 +70,10 @@
 poi数据需要在导航系统中录入过
 ```js
     LocNaviWebSDK.openMap(this, mapId, poi);
+```
+
+### 开启定时上传定位功能
+不在LocNaviWebSDK.init传值也可以单独设定定时上传参数（仅Webview加载前管用）
+```js
+    LocNaviWebSDK.setUploadLocationApi("https://xxxx.com/putinfo", 5000);
 ```
