@@ -52,6 +52,7 @@
                 .appKey(Constants.appKey)   //传入申请到的appKey
                 .uploadApi("https://xxxx/putInfo")     //定时上传定位的api地址
                 .uploadInterval(5000)   //定时上传时间间隔
+                .uuids(new String[] {"FDA50693-A4E2-4FB1-AFCF-C6EB07647825"}) //设置蓝牙扫描的uuid
                 .debug(true)    //控制是否使用测试地图
                 .build());
 ```
