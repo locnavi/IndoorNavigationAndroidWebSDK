@@ -16,7 +16,7 @@
 在app的build.gradle中添加
 ```bash
     // use jitpack from github
-    implementation 'com.github.locnavi:3d-navigation-android-sdk:0.0.11'
+    implementation 'com.github.locnavi:3d-navigation-android-sdk:0.0.12'
     implementation 'com.orhanobut:logger:2.2.0'
     implementation 'org.altbeacon:android-beacon-library:2.19.4'
 ```
