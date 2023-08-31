@@ -45,7 +45,7 @@
 
 ### 初始化
 在Application的onCreate方法中添加
-```bash
+```java
         //初始化SDK
         LocNaviWebSDK.init(new LocNaviWebSDK.Configuration
                 .Builder(this)
@@ -58,23 +58,34 @@
 ```
 
 ### 显示地图列表
-```js
+```java
     LocNaviWebSDK.openMapList(this);
 ```
 
 ### 显示室内地图
-```js
+```java
     LocNaviWebSDK.openMap(this, mapId);
 ```
 
 ### 导航至具体地址
 poi数据需要在导航系统中录入过
-```js
+```java
     LocNaviWebSDK.openMap(this, mapId, poi);
 ```
 
 ### 开启定时上传定位功能
 不在LocNaviWebSDK.init传值也可以单独设定定时上传参数（仅Webview加载前管用）
-```js
+```java
     LocNaviWebSDK.setUploadLocationApi("https://xxxx.com/putinfo", 5000);
+```
+
+### 导航事件-完成导航回调
+LocNaviWebSDK添加监听器可以获取到H5传递过来的事件
+```java
+    LocNaviWebSDK.setNaviNavigationListener(new LocNaviNavigationListener() {
+        @Override
+        public void didFinishNavigation(LocNaviLocation location) {
+                
+        }
+    });
 ```
