@@ -73,6 +73,16 @@ poi数据需要在导航系统中录入过
     LocNaviWebSDK.openMap(this, mapId, poi);
 ```
 
+### 关闭地图Activity
+LocNaviWebSDK添加监听器可以获取到H5传递过来的事件
+```java
+    LocNaviWebMapActivity activity = LocNaviWebSDK.getMapActivity();
+    if (activity != null) {
+        //内部先尝试打开空白页面，再finish，据说可以避免内存泄漏
+        activity.goBack();
+    }
+```
+
 ### 开启定时上传定位功能
 不在LocNaviWebSDK.init传值也可以单独设定定时上传参数（仅Webview加载前管用）
 ```java
