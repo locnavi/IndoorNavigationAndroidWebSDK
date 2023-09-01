@@ -16,7 +16,7 @@
 在app的build.gradle中添加
 ```bash
     // use jitpack from github
-    implementation 'com.github.locnavi:3d-navigation-android-sdk:0.0.13'
+    implementation 'com.github.locnavi:3d-navigation-android-sdk:0.0.14'
     implementation 'com.orhanobut:logger:2.2.0'
     implementation 'org.altbeacon:android-beacon-library:2.19.4'
 ```
@@ -74,7 +74,7 @@ poi数据需要在导航系统中录入过
 ```
 
 ### 关闭地图Activity
-LocNaviWebSDK添加监听器可以获取到H5传递过来的事件
+可以通过SDK获取地图的Activity，从而关闭地图界面
 ```java
     LocNaviWebMapActivity activity = LocNaviWebSDK.getMapActivity();
     if (activity != null) {
