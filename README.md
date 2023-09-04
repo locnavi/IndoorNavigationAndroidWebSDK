@@ -99,3 +99,42 @@ LocNaviWebSDK添加监听器可以获取到H5传递过来的事件
         }
     });
 ```
+
+### 本地广播
+目前添加了以下几个通知 取消(退出)导航：exit-navigation、退出路径规划：exit-route、 完成导航：navigation-done、 已在目的地：already-there。
+```java
+    private BroadcastReceiver localReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            String str = intent.getStringExtra("data");
+            try {
+                JSONObject obj = new JSONObject(str);
+                //数据解析
+            } catch (JSONException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    };
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        //添加监听
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("exit-navigation");
+        filter.addAction("exit-route");
+        filter.addAction("navigation-done");
+        filter.addAction("already-there");
+        LocalBroadcastManager.getInstance(this).registerReceiver(localReceiver, filter);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        //移除监听
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(localReceiver);
+    }
+```
