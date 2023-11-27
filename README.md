@@ -16,7 +16,7 @@
 在app的build.gradle中添加
 ```bash
     // use jitpack from github
-    implementation 'com.github.locnavi:3d-navigation-android-sdk:0.0.14'
+    implementation 'com.github.locnavi:3d-navigation-android-sdk:0.0.16'
     implementation 'com.orhanobut:logger:2.2.0'
     implementation 'org.altbeacon:android-beacon-library:2.19.4'
 ```
@@ -71,6 +71,12 @@
 poi数据需要在导航系统中录入过
 ```java
     LocNaviWebSDK.openMap(this, mapId, poi);
+```
+
+### 显示室内地图并执行一些特殊操作
+中文参数最好urlencode后再传入
+```java
+    LocNaviWebSDK.openMapWithParmas(this, mapId, "search=%E5%8E%95%E6%89%80&k=1,2,3");
 ```
 
 ### 关闭地图Activity
