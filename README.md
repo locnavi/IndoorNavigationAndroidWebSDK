@@ -106,7 +106,7 @@ LocNaviWebSDK添加监听器可以获取到H5传递过来的事件
     });
 ```
 
-### 不显示WebView时就能Beacon定位
+### 不显示WebView时就能Beacon定位 (需要定位授权)
 ```java
     //提前设置相关参数
     LocNaviWebSDK.setMapId(Constants.mapId);
@@ -119,7 +119,7 @@ LocNaviWebSDK添加监听器可以获取到H5传递过来的事件
     service.start()
     //可指定只开启蓝牙定位，暂时未使用GPS定位，默认使用LocNaviConstants.LOCATION_MODE_AUTO
     //service.start(LocNaviConstants.LOCATION_MODE_ONLY_BEACON);
-    
+
     //添加广播监听
     IntentFilter filter = new IntentFilter();
     filter.addAction("location")
