@@ -106,8 +106,33 @@ LocNaviWebSDK添加监听器可以获取到H5传递过来的事件
     });
 ```
 
-### 本地广播
-目前添加了以下几个通知 取消(退出)导航：exit-navigation、退出路径规划：exit-route、 完成导航：navigation-done、 已在目的地：already-there。
+### 不显示WebView时就能Beacon定位
+```java
+    //提前设置相关参数
+    LocNaviWebSDK.setMapId(Constants.mapId);
+    //定位相关的url，一般情况可不用设置
+    LocNaviLocationService service = LocNaviLocationService.getInstanceForApplication(this);
+    service.setServerURL("https://l.locnavi.com");
+    
+    //开始定位
+    LocNaviLocationService service = LocNaviLocationService.getInstanceForApplication(this);
+    service.start()
+    //可指定只开启蓝牙定位，暂时未使用GPS定位，默认使用LocNaviConstants.LOCATION_MODE_AUTO
+    //service.start(LocNaviConstants.LOCATION_MODE_ONLY_BEACON);
+    
+    //添加广播监听
+    IntentFilter filter = new IntentFilter();
+    filter.addAction("location")
+    LocalBroadcastManager.getInstance(this).registerReceiver(locationReceiver, filter);
+
+    //停止定位
+    LocNaviLocationService service = LocNaviLocationService.getInstanceForApplication(this);
+    service.stop();
+```
+
+
+## 本地广播
+目前添加了以下几个通知 取消(退出)导航：exit-navigation、退出路径规划：exit-route、 完成导航：navigation-done、 已在目的地：already-there、定位信息：location。
 ```java
     private BroadcastReceiver localReceiver = new BroadcastReceiver() {
         @Override
