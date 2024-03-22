@@ -16,7 +16,7 @@ IndoorNavigationAndroidWebSDK 是一个室内导航SDK，支持院内3D地图展
 在app的build.gradle中添加
 ```bash
     // use jitpack from github
-    implementation 'com.github.locnavi:IndoorNavigationAndroidWebSDK:0.0.17'
+    implementation 'com.github.locnavi:IndoorNavigationAndroidWebSDK:0.0.18'
     implementation 'com.orhanobut:logger:2.2.0'
     implementation 'org.altbeacon:android-beacon-library:2.19.4'
 ```
