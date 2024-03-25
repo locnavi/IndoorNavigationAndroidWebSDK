@@ -1,6 +1,8 @@
 # IndoorNavigationAndroidWebSDK
 
 IndoorNavigationAndroidWebSDK 是一个室内导航SDK，支持院内3D地图展示、导航等功能。
+新开1.0*版本支持Android Support版本
+0.0*及2.0*支持Android X版本
 
 ## 獲取AppKey
 
@@ -14,6 +16,7 @@ IndoorNavigationAndroidWebSDK 是一个室内导航SDK，支持院内3D地图展
 ```
 
 在app的build.gradle中添加
+Android support版本 android-beacon-library需要使用2.16.2版本
 ```bash
     // use jitpack from github
     implementation 'com.github.locnavi:IndoorNavigationAndroidWebSDK:0.0.18'
