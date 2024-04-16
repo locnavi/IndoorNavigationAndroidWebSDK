@@ -125,8 +125,8 @@ LocNaviWebSDK添加监听器可以获取到H5传递过来的事件
     //可指定只开启蓝牙定位，暂时未使用GPS定位，默认使用LocNaviConstants.LOCATION_MODE_AUTO
     //service.start(LocNaviConstants.LOCATION_MODE_ONLY_BEACON);
 
-    //设置扫描时长及扫描间隔(毫秒)
-    service.updateScanPeriods(1500, 20000);
+    //设置扫描时长及扫描间隔(毫秒), 显示webview前建议改回较正常的扫描间隔以免影响体验。
+    service.updateScanPeriods(1100, 0); //默认
 
     //添加广播监听
     IntentFilter filter = new IntentFilter();
