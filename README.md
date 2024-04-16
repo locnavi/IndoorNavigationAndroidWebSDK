@@ -19,7 +19,7 @@ IndoorNavigationAndroidWebSDK 是一个室内导航SDK，支持院内3D地图展
 Android support版本 android-beacon-library需要使用2.16.2版本
 ```bash
     // use jitpack from github
-    implementation 'com.github.locnavi:IndoorNavigationAndroidWebSDK:0.0.18'
+    implementation 'com.github.locnavi:IndoorNavigationAndroidWebSDK:2.0.22'
     implementation 'com.orhanobut:logger:2.2.0'
     implementation 'org.altbeacon:android-beacon-library:2.19.4'
 ```
@@ -119,7 +119,9 @@ LocNaviWebSDK添加监听器可以获取到H5传递过来的事件
     
     //开始定位
     LocNaviLocationService service = LocNaviLocationService.getInstanceForApplication(this);
-    service.start()
+    // service.start();
+    //支持获取更详细的定位信息
+    service.start(LocNaviConstants.LOCATION_MODE_AUTO, true);
     //可指定只开启蓝牙定位，暂时未使用GPS定位，默认使用LocNaviConstants.LOCATION_MODE_AUTO
     //service.start(LocNaviConstants.LOCATION_MODE_ONLY_BEACON);
 
