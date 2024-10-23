@@ -22,6 +22,8 @@ Android support版本 请使用com.github.locnavi:android-beacon-library:2.19.4�
     implementation 'com.github.locnavi:IndoorNavigationAndroidWebSDK:2.0.24'
     implementation 'com.orhanobut:logger:2.2.0'
     implementation 'org.altbeacon:android-beacon-library:2.19.4'
+    //非地图页面定位时需要用到
+    implementation 'com.squareup.okhttp3:okhttp:4.9.2'
 ```
 
 
@@ -35,6 +37,9 @@ Android support版本 请使用com.github.locnavi:android-beacon-library:2.19.4�
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <!-- Android 12 ibeacon扫描需要用到，动态授权 -->
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
     <!-- 调用定位权限 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
