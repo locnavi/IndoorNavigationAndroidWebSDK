@@ -36,10 +36,11 @@ Android support版本 请使用com.github.locnavi:android-beacon-library:2.19.4�
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.BLUETOOTH" />
-    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30"/>
     <!-- Android 12 ibeacon扫描需要用到，动态授权 -->
-    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT"/>
     <!-- 调用定位权限 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -133,6 +134,11 @@ LocNaviWebSDK添加监听器可以获取到H5传递过来的事件
     //设置扫描时长及扫描间隔(毫秒), 显示webview前建议改回较正常的扫描间隔以免影响体验。
     service.updateScanPeriods(1100, 0); //默认
 
+    //背景定位功能 需要
+    service.setupForegroundService(R.mipmap.ic_launcher, "背景定位中", "详情信息");
+    //自行调整背景定位时的扫描时长及扫描间隔
+    service.updateScanPeriods(1100, 0, 1100, 0);
+
     //添加广播监听
     IntentFilter filter = new IntentFilter();
     filter.addAction("location")
@@ -141,6 +147,8 @@ LocNaviWebSDK添加监听器可以获取到H5传递过来的事件
     //停止定位
     LocNaviLocationService service = LocNaviLocationService.getInstanceForApplication(this);
     service.stop();
+    //停止背景定位
+    service.stopForegroundService();
 ```
 
 
