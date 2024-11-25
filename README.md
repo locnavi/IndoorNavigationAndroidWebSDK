@@ -190,3 +190,113 @@ LocNaviWebSDK添加监听器可以获取到H5传递过来的事件
         LocalBroadcastManager.getInstance(this).unregisterReceiver(localReceiver);
     }
 ```
+
+## 动态申请权限代码参考
+LocNaviWebSDK内的webActivity新增了权限申请的代码，无界面定位模块的权限申请还是需要自行实现。以下提供参考代码。
+```java
+    //判断手机定位功能是否开启
+    private void verifyLocation() {
+        if (!this.isLocationEnabled()) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                    .setTitle("定位功能未开启")
+                    .setMessage("室内定位需要定位功能开启后使用")
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //openGPS(MainActivity.this);
+                            //跳转GPS设置界面
+                            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                            startActivity(intent);
+                        }
+                    });
+            builder.setCancelable(true);
+            builder.show();
+        }
+    }
+
+    //判断定位功能是否开启
+    private boolean isLocationEnabled() {
+        int locationMode = 0;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            try {
+                locationMode = Settings.Secure.getInt(getContentResolver(), Settings.Secure.LOCATION_MODE);
+            } catch (Settings.SettingNotFoundException e) {
+                e.printStackTrace();
+                return false;
+            }
+            return locationMode != Settings.Secure.LOCATION_MODE_OFF;
+        } else {
+            String locationProviders = Settings.Secure.getString(getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+            return !TextUtils.isEmpty(locationProviders);
+        }
+    }
+
+    private void requestPermissions() {
+        // 检查和请求蓝牙和位置权限
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED ||
+                    ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // 请求蓝牙扫描和定位权限
+                ActivityCompat.requestPermissions(this,
+                        new String[]{
+                                Manifest.permission.ACCESS_FINE_LOCATION,
+                                Manifest.permission.BLUETOOTH_SCAN,
+                                Manifest.permission.BLUETOOTH_CONNECT
+                        },
+                        REQUEST_CODE_BLUETOOTH_SCAN
+                );
+            }
+        }
+    }
+
+        @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case REQUEST_FINE_LOCATION:
+                if (grantResults.length >= 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED && geolocationCallback != null) {
+                    geolocationCallback.invoke(geolocationOrigin, true, false);
+                }
+                break;
+            case REQUEST_CODE_BLUETOOTH_SCAN: {
+                if (grantResults.length >= 1) {
+                    if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                        //同意授权
+                        this.startRangeBeacons();
+                    } else {
+                        String msg;
+                        if (grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                            msg = "请在设置页面开启【位置信息】权限。";
+                        } else if (grantResults[1] != PackageManager.PERMISSION_GRANTED) {
+                            msg = "请在设置页面开启【附近的设备】权限。";
+                        } else {
+                            msg = "请在设置页面开启【附近的设备】和【位置信息】权限。";
+                        }
+                        //提示开启授权
+                        AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                                .setTitle("室内定位功能受限")
+                                .setMessage(msg)
+                                .setNegativeButton(android.R.string.cancel, null)
+                                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        //openGPS(MainActivity.this);
+                                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                        intent.setData(Uri.parse("package:" + getPackageName()));
+                                        startActivity(intent);
+                                        //跳转GPS设置界面
+//                                        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+//                                        startActivity(intent);
+                                    }
+                                });
+                        builder.setCancelable(true);
+                        builder.show();
+                    }
+                }
+            }
+            break;
+
+        }
+    }
+```
