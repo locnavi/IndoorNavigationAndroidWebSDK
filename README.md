@@ -19,7 +19,7 @@ IndoorNavigationAndroidWebSDK 是一个室内导航SDK，支持院内3D地图展
 Android support版本 请使用com.github.locnavi:android-beacon-library:2.19.4版本
 ```bash
     // use jitpack from github
-    implementation 'com.github.locnavi:IndoorNavigationAndroidWebSDK:2.0.24'
+    implementation 'com.github.locnavi:IndoorNavigationAndroidWebSDK:2.0.28'
     implementation 'com.orhanobut:logger:2.2.0'
     implementation 'org.altbeacon:android-beacon-library:2.19.4'
     //非地图页面定位时需要用到
@@ -215,6 +215,35 @@ LocNaviWebSDK内的webActivity新增了权限申请的代码，无界面定位�
         }
     }
 
+    //判断手机蓝牙是否开启，没有开启尝试开启。
+    public void verifyBluetooth() {
+        BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (bluetoothAdapter == null) {
+            // 设备不支持蓝牙
+            Toast.makeText(this, R.string.device_not_support_bluetooth, Toast.LENGTH_SHORT).show();
+        } else {
+            // 设备支持蓝牙
+            if (!bluetoothAdapter.isEnabled()) {
+                // 蓝牙未启用，需要请求打开
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // 请求蓝牙扫描和定位权限
+                    ActivityCompat.requestPermissions(this,
+                            new String[]{
+                                    Manifest.permission.BLUETOOTH_CONNECT,
+                            },
+                            REQUEST_CODE_BLUETOOTH_OPEN
+                    );
+                    return;
+                }
+                bluetoothAdapter.enable();
+            } else {
+                // 蓝牙已启用
+            }
+        }
+    }
+
     //判断定位功能是否开启
     private boolean isLocationEnabled() {
         int locationMode = 0;
@@ -293,6 +322,12 @@ LocNaviWebSDK内的webActivity新增了权限申请的代码，无界面定位�
                         builder.setCancelable(true);
                         builder.show();
                     }
+                }
+            }
+            break;
+            case REQUEST_CODE_BLUETOOTH_OPEN: {
+                if (grantResults.length >= 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    verifyBluetooth();
                 }
             }
             break;
