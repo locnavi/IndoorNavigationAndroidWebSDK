@@ -24,6 +24,8 @@ Android support版本 请使用com.github.locnavi:android-beacon-library:2.19.4�
     implementation 'org.altbeacon:android-beacon-library:2.19.4'
     //非地图页面定位时需要用到
     implementation 'com.squareup.okhttp3:okhttp:4.9.2'
+    //在较新的androidx版本中需要添加localbroadcastmanager库
+    implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.1.0'
 ```
 
 
