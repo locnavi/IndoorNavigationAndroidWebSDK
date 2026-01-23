@@ -19,7 +19,7 @@ IndoorNavigationAndroidWebSDK 是一个室内导航SDK，支持院内3D地图展
 Android support版本 请使用com.github.locnavi:android-beacon-library:2.19.4版本
 ```bash
     // use jitpack from github
-    implementation 'com.github.locnavi:IndoorNavigationAndroidWebSDK:2.0.37'
+    implementation 'com.github.locnavi:IndoorNavigationAndroidWebSDK:2.0.38'
     implementation 'com.orhanobut:logger:2.2.0'
     implementation 'org.altbeacon:android-beacon-library:2.19.4'
     //非地图页面定位时需要用到
